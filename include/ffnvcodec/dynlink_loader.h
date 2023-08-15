@@ -142,6 +142,10 @@ typedef struct CudaFunctions {
     tcuDeviceGetAttribute *cuDeviceGetAttribute;
     tcuDeviceGetName *cuDeviceGetName;
     tcuDeviceGetUuid *cuDeviceGetUuid;
+    tcuDeviceGetUuid_v2 *cuDeviceGetUuid_v2;
+    tcuDeviceGetLuid *cuDeviceGetLuid;
+    tcuDeviceGetByPCIBusId *cuDeviceGetByPCIBusId;
+    tcuDeviceGetPCIBusId *cuDeviceGetPCIBusId;
     tcuDeviceComputeCapability *cuDeviceComputeCapability;
     tcuCtxCreate_v2 *cuCtxCreate;
     tcuCtxSetLimit *cuCtxSetLimit;
@@ -178,6 +182,7 @@ typedef struct CudaFunctions {
     tcuStreamSynchronize *cuStreamSynchronize;
     tcuStreamDestroy_v2 *cuStreamDestroy;
     tcuStreamAddCallback *cuStreamAddCallback;
+    tcuStreamWaitEvent *cuStreamWaitEvent;
     tcuEventCreate *cuEventCreate;
     tcuEventDestroy_v2 *cuEventDestroy;
     tcuEventSynchronize *cuEventSynchronize;
@@ -342,6 +347,7 @@ static inline int cuda_load_functions(CudaFunctions **functions, void *logctx)
     LOAD_SYMBOL(cuStreamSynchronize, tcuStreamSynchronize, "cuStreamSynchronize");
     LOAD_SYMBOL(cuStreamDestroy, tcuStreamDestroy_v2, "cuStreamDestroy_v2");
     LOAD_SYMBOL(cuStreamAddCallback, tcuStreamAddCallback, "cuStreamAddCallback");
+    LOAD_SYMBOL(cuStreamWaitEvent, tcuStreamWaitEvent, "cuStreamWaitEvent");
     LOAD_SYMBOL(cuEventCreate, tcuEventCreate, "cuEventCreate");
     LOAD_SYMBOL(cuEventDestroy, tcuEventDestroy_v2, "cuEventDestroy_v2");
     LOAD_SYMBOL(cuEventSynchronize, tcuEventSynchronize, "cuEventSynchronize");
@@ -369,6 +375,10 @@ static inline int cuda_load_functions(CudaFunctions **functions, void *logctx)
     LOAD_SYMBOL(cuGraphicsResourceGetMappedPointer, tcuGraphicsResourceGetMappedPointer, "cuGraphicsResourceGetMappedPointer_v2");
 
     LOAD_SYMBOL_OPT(cuDeviceGetUuid, tcuDeviceGetUuid, "cuDeviceGetUuid");
+    LOAD_SYMBOL_OPT(cuDeviceGetUuid_v2, tcuDeviceGetUuid_v2, "cuDeviceGetUuid_v2");
+    LOAD_SYMBOL_OPT(cuDeviceGetLuid, tcuDeviceGetLuid, "cuDeviceGetLuid");
+    LOAD_SYMBOL_OPT(cuDeviceGetByPCIBusId, tcuDeviceGetByPCIBusId, "cuDeviceGetByPCIBusId");
+    LOAD_SYMBOL_OPT(cuDeviceGetPCIBusId, tcuDeviceGetPCIBusId, "cuDeviceGetPCIBusId");
     LOAD_SYMBOL_OPT(cuImportExternalMemory, tcuImportExternalMemory, "cuImportExternalMemory");
     LOAD_SYMBOL_OPT(cuDestroyExternalMemory, tcuDestroyExternalMemory, "cuDestroyExternalMemory");
     LOAD_SYMBOL_OPT(cuExternalMemoryGetMappedBuffer, tcuExternalMemoryGetMappedBuffer, "cuExternalMemoryGetMappedBuffer");

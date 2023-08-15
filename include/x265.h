@@ -696,6 +696,7 @@ struct x265_param;
 typedef struct x265_zone
 {
     int   startFrame, endFrame; /* range of frame numbers */
+    int   keyframeMax;          /* it store the default/user defined keyframeMax value*/
     int   bForceQp;             /* whether to use qp vs bitrate factor */
     int   qp;
     float bitrateFactor;
@@ -1849,6 +1850,10 @@ typedef struct x265_param
     /*Flag to indicate if rate-control history has to be reset during zone reconfiguration.
       Default 1 (Enabled). API only. */
     int       bResetZoneConfig;
+
+    /*Flag to indicate rate-control history has not to be reset during zone reconfiguration.
+      Default 0 (Disabled) */
+    int       bNoResetZoneConfig;
 
     /* It reduces the bits spent on the inter-frames within the scenecutWindow before and / or after a scenecut
      * by increasing their QP in ratecontrol pass2 algorithm without any deterioration in visual quality.
