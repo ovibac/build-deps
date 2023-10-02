@@ -16,20 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef SWSCALE_VERSION_MAJOR_H
-#define SWSCALE_VERSION_MAJOR_H
+#ifndef AVUTIL_ATTRIBUTES_INTERNAL_H
+#define AVUTIL_ATTRIBUTES_INTERNAL_H
 
-/**
- * @file
- * swscale version macros
- */
+#include "attributes.h"
 
-#define LIBSWSCALE_VERSION_MAJOR   7
+#if (AV_GCC_VERSION_AT_LEAST(4,0) || defined(__clang__)) && (defined(__ELF__) || defined(__MACH__))
+#    define attribute_visibility_hidden __attribute__((visibility("hidden")))
+#    define FF_VISIBILITY_PUSH_HIDDEN   _Pragma("GCC visibility push(hidden)")
+#    define FF_VISIBILITY_POP_HIDDEN    _Pragma("GCC visibility pop")
+#else
+#    define attribute_visibility_hidden
+#    define FF_VISIBILITY_PUSH_HIDDEN
+#    define FF_VISIBILITY_POP_HIDDEN
+#endif
 
-/**
- * FF_API_* defines may be placed below to indicate public API that will be
- * dropped at a future version bump. The defines themselves are not part of
- * the public API and may change, break or disappear at any time.
- */
-
-#endif /* SWSCALE_VERSION_MAJOR_H */
+#endif /* AVUTIL_ATTRIBUTES_INTERNAL_H */
