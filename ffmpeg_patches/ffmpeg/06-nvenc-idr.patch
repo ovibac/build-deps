@@ -1,0 +1,22 @@
+Disable IDR 
+
+---
+ libavcodec/nvenc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libavcodec/nvenc.c b/libavcodec/nvenc.c
+index 626f10d20a..8f28ce6dbc 100644
+--- a/libavcodec/nvenc.c
++++ b/libavcodec/nvenc.c
+@@ -2606,7 +2606,7 @@ static void reconfig_encoder(AVCodecContext *avctx, const AVFrame *frame)
+
+         if (reconfig_bitrate) {
+             params.resetEncoder = 1;
+-            params.forceIDR = 1;
++            //params.forceIDR = 1;
+
+             needs_encode_config = 1;
+             needs_reconfig = 1;
+-- 
+2.40.0.windows.1
+
